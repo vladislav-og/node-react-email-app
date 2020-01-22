@@ -3,7 +3,7 @@ const helper = sendgrid.mail;
 const keys = require('../config/keys');
 class Mailer extends helper.Mail {
 
-    constructor({ subject, recipient }, content) {
+    constructor({ subject, recipients }, content) {
         super();
 
         this.sgApi = sendgrid(keys.sendGridKey);
@@ -47,7 +47,7 @@ class Mailer extends helper.Mail {
             path: '/v3/mail/send',
             body: this.toJSON(),
         });
-        const response = this.sgApi.API(request);
+        const response = await this.sgApi.API(request);
         return response;
     }
 }
