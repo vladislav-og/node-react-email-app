@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {connect} from 'react-redux'
-import * as actions from '../../actions'
+import SurveyForm from './SurveyForm'
 
 
 class SurveyNew extends Component {
@@ -8,10 +7,10 @@ class SurveyNew extends Component {
 
         return (
             <div>
-                New Survey!
+                <SurveyForm/>
             </div>
         )
     }
 }
 
-export default (SurveyNew);
+export default SurveyNew;
