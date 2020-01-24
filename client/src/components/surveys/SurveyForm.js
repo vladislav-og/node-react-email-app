@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Link} from 'react-router-dom';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field,  } from 'redux-form';
 import SurveyField from './SurveyField';
 import _ from 'lodash'
 
@@ -15,7 +15,13 @@ class SurveyForm extends Component {
 
     renderFields() {
         return _.map(FIELDS, ({label, name}) => {
-            return <Field key={name} component={SurveyField} type="text" label={label} name={name}/>
+            return <Field
+                    key={name}
+                    component={SurveyField}
+                    type="text"
+                    label={label}
+                    name={name}
+                />
         })
     }
 
@@ -37,6 +43,19 @@ class SurveyForm extends Component {
     }
 }
 
+function validate(values) {
+    const errors = {};
+    FIELDS.forEach(({name}) => {
+        if (!values[name]) {
+            errors[name] = `You must provide a ${name}`
+        }
+    });
+
+
+    return errors;
+}
+
 export default reduxForm({
+    validate,
     form: 'surveyForm'
 })(SurveyForm);
